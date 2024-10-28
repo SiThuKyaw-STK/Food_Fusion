@@ -44,7 +44,7 @@ ob_start();
 
                     <!-- Team Member 1 -->
                     <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                        <img class="w-24 h-24 mx-auto rounded-full" src="team-member1.jpg" alt="Team Member 1">
+                        <img class="w-24 h-24 mx-auto rounded-full object-cover object-top" src="./assets/img/chef1.jpg" alt="Team Member 1">
                         <h4 class="text-xl font-semibold mt-4">John Doe</h4>
                         <p class="text-gray-600">Head Chef</p>
                         <p class="mt-4 text-gray-700">
@@ -55,7 +55,7 @@ ob_start();
 
                     <!-- Team Member 2 -->
                     <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                        <img class="w-24 h-24 mx-auto rounded-full" src="team-member2.jpg" alt="Team Member 2">
+                        <img class="w-24 h-24 mx-auto rounded-full object-cover object-top" src="./assets/img/chef2.jpg" alt="Team Member 2">
                         <h4 class="text-xl font-semibold mt-4">Jane Smith</h4>
                         <p class="text-gray-600">Recipe Developer</p>
                         <p class="mt-4 text-gray-700">
@@ -66,7 +66,7 @@ ob_start();
 
                     <!-- Team Member 3 -->
                     <div class="bg-white shadow-lg rounded-lg p-6 text-center">
-                        <img class="w-24 h-24 mx-auto rounded-full" src="team-member3.jpg" alt="Team Member 3">
+                        <img class="w-24 h-24 mx-auto rounded-full object-cover object-top" src="./assets/img/chef3.jpg" alt="Team Member 3">
                         <h4 class="text-xl font-semibold mt-4">Alex Johnson</h4>
                         <p class="text-gray-600">Food Blogger</p>
                         <p class="mt-4 text-gray-700">

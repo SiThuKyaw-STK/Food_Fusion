@@ -54,7 +54,7 @@
                 <div class="flex items-center gap-6">
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="index.php"><i
                             class="fa-solid fa-house"></i></a>
-                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#recipes">Recipe</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="recipes-list.php">Recipe</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="about-us.php">About Us</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#community">Community</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#contact_us">Contact Us</a>
