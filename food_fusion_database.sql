@@ -158,24 +158,24 @@ INSERT INTO recipes_category (recipe_id, category_id) VALUES
   (10, 7);
 
 INSERT INTO ingredients (name, unit) VALUES 
-  ('Beef', 'grams'),
-  ('Mushrooms', 'grams'),
-  ('Sour Cream', 'grams'),
-  ('Lettuce', 'grams'),
-  ('Parmesan Cheese', 'grams'),
-  ('Flour', 'grams'),
-  ('Sugar', 'grams'),
-  ('Cocoa Powder', 'grams'),
-  ('Eggs', 'count'),
-  ('Milk', 'milliliters'),
-  ('Pasta', 'grams'),
-  ('Tomatoes', 'grams'),
-  ('Chicken', 'grams'),
-  ('Apples', 'grams'),
-  ('Avocados', 'grams'),
-  ('Cinnamon', 'grams'),
-  ('Soy Sauce', 'milliliters'),
-  ('Shrimp', 'grams');
+    ('Beef', 1),
+    ('Mushrooms', 1),
+    ('Sour Cream', 1),
+    ('Lettuce', 1),
+    ('Parmesan Cheese', 1),
+    ('Flour', 1),
+    ('Sugar', 1),
+    ('Cocoa Powder', 1),
+    ('Eggs', 2),
+    ('Milk', 3),
+    ('Pasta', 1),
+    ('Tomatoes', 1),
+    ('Chicken', 1),
+    ('Apples', 1),
+    ('Avocados', 1),
+    ('Cinnamon', 1),
+    ('Soy Sauce', 3),
+    ('Shrimp', 1);
 
 INSERT INTO recipe_ingredients (recipe_id, ingredients_id) VALUES 
   (1, 1),
