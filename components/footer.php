@@ -1,9 +1,9 @@
     <!-- Modal -->
-    <div id="joinUsModal"
+    <div id="register_modal"
         class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center transition-all duration-200">
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
             <h2 class="text-2xl font-bold mb-4">Register</h2>
-            <form id="joinUsForm">
+            <form id="register_form">
                 <div class="mb-4">
                     <label for="firstName" class="block text-sm font-medium text-gray-700">First Name</label>
                     <input type="text" id="firstName" name="firstName"
@@ -25,12 +25,36 @@
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
                 </div>
                 <div class="flex justify-end">
-                    <button type="button" id="closeModal" class="mr-2 text-gray-500">Cancel</button>
+                    <button type="button" id="closeModalRegister" class="mr-2 text-gray-500">Cancel</button>
                     <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded-lg">Submit</button>
                 </div>
             </form>
         </div>
     </div>
+
+    <div id="login_modal"
+        class="hidden fixed inset-0 bg-gray-900 bg-opacity-50 flex items-center justify-center transition-all duration-200">
+        <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+            <h2 class="text-2xl font-bold mb-4">Login</h2>
+            <form id="login_form">
+                <div class="mb-4">
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="mb-4">
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md" required>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" id="closeModalLogin" class="mr-2 text-gray-500">Cancel</button>
+                    <button type="submit" class="bg-blue-700 text-white px-4 py-2 rounded-lg">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
 
     <!-- Footer -->
@@ -56,18 +80,28 @@
     })
     // Open modal when button is clicked
     $('#joinUsBtn').on('click', function () {
-        $('#joinUsModal').removeClass('hidden');
+        $('#register_modal').removeClass('hidden');
+    });
+
+    $('#loginBtn').on('click', function () {
+        $('#login_modal').removeClass('hidden');
     });
 
     // Close modal when cancel button is clicked
-    $('#closeModal').on('click', function () {
-        $('#joinUsModal').addClass('hidden');
+    $('#closeModalRegister').on('click', function () {
+        $('#register_modal').addClass('hidden');
+    });
+    $('#closeModalLogin').on('click', function () {
+        $('#login_modal').addClass('hidden');
     });
 
     // Close modal when clicking outside of the modal content
     $(window).on('click', function (e) {
-        if ($(e.target).is('#joinUsModal')) {
-            $('#joinUsModal').addClass('hidden');
+        if ($(e.target).is('#register_modal')) {
+            $('#register_modal').addClass('hidden');
+        }
+        if ($(e.target).is('#login_modal')) {
+            $('#login_modal').addClass('hidden');
         }
     });
 
@@ -82,6 +116,85 @@
 
     // Mount the Splide carousel
     splide.mount();
+
+    $("#register_form").on("submit", function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        var formData = $(this).serialize(); // Serialize the form data
+
+        $.ajax({
+            type: "POST",
+            url: "register.php", // Your PHP registration script
+            data: formData,
+            success: function(response) {
+                // Assuming response is a JSON object with a 'status' key
+                var result = JSON.parse(response);
+                console.log(result.success);
+                            
+                
+                if (result.success === true) {
+                    // Close the registration modal
+                    $("#register_modal").addClass("hidden");                    
+
+                    // Open the login modal
+                    $("#login_modal").removeClass("hidden");
+                } else {
+                    // Handle registration error (e.g., display message)
+                    // alert(result.message);
+                    console.log("fucker");
+                    
+                    // $("#register_modal").addClass("hidden");
+
+                }
+            },
+            error: function() {
+                // Handle AJAX error
+                alert("There was an error with the registration. Please try again.");
+            }
+        });
+    });
+
+    // Close modal button
+    $("#closeModalRegister").on("click", function() {
+        $("#register_modal").addClass("hidden");
+    });
+
+    $("#login_form").on("submit", function(e) {
+        e.preventDefault(); // Prevent the default form submission
+
+        var formData = $(this).serialize(); // Serialize the form data
+
+        $.ajax({
+            type: "POST",
+            url: "login.php", // The PHP script for login processing
+            data: formData,
+            success: function(response) {
+                // Assuming response is a JSON object with a 'status' key
+                var result = JSON.parse(response);                
+
+                if (result.success === true) {
+                    // Close the login modal and redirect or show success message
+                    $("#login_modal").addClass("hidden");
+                    alert("Login successful! Redirecting to your dashboard...");
+                    window.location.href = "dashboard.php"; // Replace with your dashboard or homepage
+                } else {
+                    // Handle login error (e.g., display message)
+                    alert(result.message);
+                }
+            },
+            error: function() {
+                // Handle AJAX error
+                alert("There was an error logging in. Please try again.");
+            }
+        });
+    });
+
+    // Close modal button
+    $("#closeModalLogin").on("click", function() {
+        $("#login_modal").addClass("hidden");
+    });
+
+
 </script>
 
 </html>

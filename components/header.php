@@ -1,3 +1,7 @@
+<?php
+    include 'db.php';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +46,7 @@
                         <i class="fas fa-user text-xl"></i>
                     </div>
                     <div>
-                        <a class="text-lg" href="#">Sign In</a>
+                        <button id="loginBtn" class="text-lg" href="#">LogIn</button>
                         <span class="mx-2">|</span>
                         <a class="text-lg" href="#">Register</a>
                     </div>

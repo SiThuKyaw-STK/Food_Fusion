@@ -5,6 +5,8 @@ CREATE TABLE `user` (
   password VARCHAR(500),
   email VARCHAR(500),
   phone VARCHAR(500),
+  failed_attempts INT DEFAULT 0,
+  lockout_until TIMESTAMP NULL DEFAULT NULL,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   deleted_at TIMESTAMP NULL
@@ -85,16 +87,16 @@ INSERT INTO user (first_name, last_name, password, email, phone) VALUES
   ('Charlie', 'Brown', 'hashed_password5', 'charlie@example.com', '3334445555');
 
 INSERT INTO recipes (user_id, image, recipe_name, description, preparation_time, cooking_time, instructions, tip, level) VALUES 
-  (1, 'path/to/image1.jpg', 'Beef Stroganoff', 'A creamy Russian beef dish.', 20, 40, 'Cook beef, add mushrooms, then combine with cream.', 'Use sour cream for added richness.', 3),
-  (2, 'path/to/image2.jpg', 'Chocolate Cake', 'Rich and moist chocolate cake.', 15, 30, 'Mix ingredients, bake at 350°F for 30 minutes.', 'Top with ganache for extra flavor.', 2),
-  (3, 'path/to/image3.jpg', 'Caesar Salad', 'A fresh and tangy salad with Caesar dressing.', 10, 5, 'Chop lettuce, add croutons, and drizzle dressing.', 'Use freshly grated Parmesan.', 1),
-  (1, 'path/to/image4.jpg', 'Spaghetti Bolognese', 'Classic Italian pasta with rich meat sauce.', 15, 45, 'Simmer meat with tomatoes, serve with pasta.', 'Add a bay leaf for flavor.', 2),
-  (2, 'path/to/image5.jpg', 'Chicken Tikka Masala', 'A popular Indian dish with spiced chicken in tomato sauce.', 20, 30, 'Cook marinated chicken, add to tomato-based sauce.', 'Serve with naan or rice.', 3),
-  (3, 'path/to/image6.jpg', 'Apple Pie', 'Traditional dessert with apple filling.', 30, 60, 'Prepare dough, add apple filling, and bake.', 'Use Granny Smith apples for tartness.', 2),
-  (1, 'path/to/image7.jpg', 'Guacamole', 'Classic Mexican avocado dip.', 10, 0, 'Mash avocados, add lime, salt, and veggies.', 'Add some diced tomatoes for texture.', 1),
-  (2, 'path/to/image8.jpg', 'French Toast', 'Sweet breakfast with cinnamon-flavored bread.', 10, 10, 'Dip bread in egg mixture, cook until golden.', 'Top with powdered sugar and maple syrup.', 1),
-  (3, 'path/to/image9.jpg', 'Vegetable Stir Fry', 'Quick and healthy veggie dish.', 15, 10, 'Stir fry vegetables with soy sauce and garlic.', 'Use sesame oil for extra flavor.', 1),
-  (1, 'path/to/image10.jpg', 'Tom Yum Soup', 'Spicy Thai soup with shrimp.', 15, 20, 'Simmer broth with spices, add shrimp and mushrooms.', 'Adjust lime juice and chili to taste.', 2);
+  (1, './assets/img/demo_food1.jpg', 'Beef Stroganoff', 'A creamy Russian beef dish.', 20, 40, 'Cook beef, add mushrooms, then combine with cream.', 'Use sour cream for added richness.', 3),
+  (2, './assets/img/demo_food1.jpg', 'Chocolate Cake', 'Rich and moist chocolate cake.', 15, 30, 'Mix ingredients, bake at 350°F for 30 minutes.', 'Top with ganache for extra flavor.', 2),
+  (3, './assets/img/demo_food1.jpg', 'Caesar Salad', 'A fresh and tangy salad with Caesar dressing.', 10, 5, 'Chop lettuce, add croutons, and drizzle dressing.', 'Use freshly grated Parmesan.', 1),
+  (1, './assets/img/demo_food1.jpg', 'Spaghetti Bolognese', 'Classic Italian pasta with rich meat sauce.', 15, 45, 'Simmer meat with tomatoes, serve with pasta.', 'Add a bay leaf for flavor.', 2),
+  (2, './assets/img/demo_food1.jpg', 'Chicken Tikka Masala', 'A popular Indian dish with spiced chicken in tomato sauce.', 20, 30, 'Cook marinated chicken, add to tomato-based sauce.', 'Serve with naan or rice.', 3),
+  (3, './assets/img/demo_food1.jpg', 'Apple Pie', 'Traditional dessert with apple filling.', 30, 60, 'Prepare dough, add apple filling, and bake.', 'Use Granny Smith apples for tartness.', 2),
+  (1, './assets/img/demo_food1.jpg', 'Guacamole', 'Classic Mexican avocado dip.', 10, 0, 'Mash avocados, add lime, salt, and veggies.', 'Add some diced tomatoes for texture.', 1),
+  (2, './assets/img/demo_food1.jpg', 'French Toast', 'Sweet breakfast with cinnamon-flavored bread.', 10, 10, 'Dip bread in egg mixture, cook until golden.', 'Top with powdered sugar and maple syrup.', 1),
+  (3, './assets/img/demo_food1.jpg', 'Vegetable Stir Fry', 'Quick and healthy veggie dish.', 15, 10, 'Stir fry vegetables with soy sauce and garlic.', 'Use sesame oil for extra flavor.', 1),
+  (1, './assets/img/demo_food1.jpg', 'Tom Yum Soup', 'Spicy Thai soup with shrimp.', 15, 20, 'Simmer broth with spices, add shrimp and mushrooms.', 'Adjust lime juice and chili to taste.', 2);
 
 INSERT INTO recipe_steps (recipe_id, step_name, step_desc, sorting) VALUES 
   (1, 'Prepare Beef', 'Slice beef into thin strips.', 1),
