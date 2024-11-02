@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'];
 
     // Prepare to fetch user by email
-    $stmt = $conn->prepare("SELECT password, failed_attempts, lockout_until FROM user WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password, failed_attempts, lockout_until FROM user WHERE email = ?");
     $stmt->bind_param("s", $email); // Bind parameters
     $stmt->execute();
     $result = $stmt->get_result(); // Get the result set from the executed statement
@@ -27,7 +27,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare("UPDATE user SET failed_attempts = 0, lockout_until = NULL WHERE email = ?");
             $stmt->bind_param("s", $email); // Bind parameters
             $stmt->execute();
-            $_SESSION['user'] = $email; // Set session variable for logged-in user
+
+            // Set session variable as an associative array for logged-in user
+            $_SESSION['user'] = [
+                'id' => $user['id'],
+                'first_name' => $user['first_name'],
+                'last_name' => $user['last_name'],
+                'email' => $user['email']
+            ];
+
             echo json_encode(['success' => true]);
             exit;
         } else {

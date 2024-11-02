@@ -118,13 +118,13 @@
     splide.mount();
 
     $("#register_form").on("submit", function(e) {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
 
-        var formData = $(this).serialize(); // Serialize the form data
+        var formData = $(this).serialize();
 
         $.ajax({
             type: "POST",
-            url: "register.php", // Your PHP registration script
+            url: "register.php",
             data: formData,
             success: function(response) {
                 // Assuming response is a JSON object with a 'status' key
@@ -133,67 +133,64 @@
                             
                 
                 if (result.success === true) {
-                    // Close the registration modal
                     $("#register_modal").addClass("hidden");                    
 
-                    // Open the login modal
                     $("#login_modal").removeClass("hidden");
                 } else {
-                    // Handle registration error (e.g., display message)
-                    // alert(result.message);
-                    console.log("fucker");
-                    
-                    // $("#register_modal").addClass("hidden");
-
+                    console.log("some error");
                 }
             },
             error: function() {
-                // Handle AJAX error
                 alert("There was an error with the registration. Please try again.");
             }
         });
     });
 
-    // Close modal button
     $("#closeModalRegister").on("click", function() {
         $("#register_modal").addClass("hidden");
     });
 
     $("#login_form").on("submit", function(e) {
-        e.preventDefault(); // Prevent the default form submission
+        e.preventDefault();
 
-        var formData = $(this).serialize(); // Serialize the form data
+        var formData = $(this).serialize();
+        console.log("test");
+        
 
         $.ajax({
             type: "POST",
-            url: "login.php", // The PHP script for login processing
+            url: "loginBackEnd.php",
             data: formData,
             success: function(response) {
                 // Assuming response is a JSON object with a 'status' key
                 var result = JSON.parse(response);                
 
                 if (result.success === true) {
-                    // Close the login modal and redirect or show success message
                     $("#login_modal").addClass("hidden");
-                    alert("Login successful! Redirecting to your dashboard...");
-                    window.location.href = "dashboard.php"; // Replace with your dashboard or homepage
+                    alert("Login successful! Redirecting to your community...");
+                    window.location.href = "community.php";
                 } else {
-                    // Handle login error (e.g., display message)
                     alert(result.message);
                 }
             },
             error: function() {
-                // Handle AJAX error
                 alert("There was an error logging in. Please try again.");
             }
         });
     });
 
-    // Close modal button
-    $("#closeModalLogin").on("click", function() {
-        $("#login_modal").addClass("hidden");
-    });
+    // logout 
+    $("#logoutBtn").click(function(event) {
+        event.preventDefault(); // Prevent the default link behavior
 
+        // Show confirmation box
+        const confirmed = confirm("Are you sure you want to log out?");
+        
+        // If the user confirms, proceed to the logout page
+        if (confirmed) {
+            window.location.href = $(this).attr("href");
+        }
+    });
 
 </script>
 

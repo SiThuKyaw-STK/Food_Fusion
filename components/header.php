@@ -1,6 +1,10 @@
 <?php
-    include 'db.php';
+// Check if a session is already active before starting a new one
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -46,9 +50,15 @@
                         <i class="fas fa-user text-xl"></i>
                     </div>
                     <div>
-                        <button id="loginBtn" class="text-lg" href="#">LogIn</button>
-                        <span class="mx-2">|</span>
-                        <a class="text-lg" href="#">Register</a>
+                        <?php if (isset($_SESSION['user'])): ?>
+                            <span class="text-lg">Welcome, <?= htmlspecialchars($_SESSION['user']['first_name']); ?>!</span>
+                            <span class="mx-2">|</span>
+                            <a id="logoutBtn" class="text-lg" href="logout.php">LogOut</a>
+                        <?php else: ?>
+                            <button id="loginBtn" class="text-lg" href="#">LogIn</button>
+                            <span class="mx-2">|</span>
+                            <a class="text-lg" href="#">Register</a>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
@@ -60,7 +70,7 @@
                             class="fa-solid fa-house"></i></a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="recipes-list.php">Recipe</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="about-us.php">About Us</a>
-                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#community">Community</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="community.php">Community</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#contact_us">Contact Us</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold"
                         href="#educational">Educational</a>
