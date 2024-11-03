@@ -37,12 +37,12 @@ ob_start();
         </div>
 
         <!-- Recipe Cards -->
-        <div class="grid grid-cols-4 gap-6 my-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 my-5 px-3">
             <?php while ($recipe = $recipes->fetch_assoc()): ?>
-                <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
-                    <a href="recipes-details.php?id=<?= $recipe['id']; ?>">
-                        <img class="rounded-t-lg" src="<?= $recipe['image']; ?>" alt="<?= $recipe['recipe_name']; ?>" />
-                    </a>
+                <div class="bg-white border border-gray-200 rounded-lg shadow">
+                    <div>
+                        <img style="height: 250px;" class="rounded-t-lg w-full object-cover" src="<?= $recipe['image']; ?>" alt="<?= $recipe['recipe_name']; ?>" />
+                    </div>
                     <div class="p-5">
                         <a href="recipes-details.php?id=<?= $recipe['id']; ?>">
                             <h5 class="font-bold tracking-tight text-gray-900"><?= $recipe['recipe_name']; ?></h5>

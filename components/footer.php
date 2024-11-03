@@ -105,18 +105,6 @@
         }
     });
 
-    var splide = new Splide('#splide', {
-        type: 'loop',     // Enables infinite loop
-        perPage: 3,          // Displays 1 slide at a time
-        autoplay: true,      // Autoplay slides
-        interval: 3000,      // 3 seconds per slide
-        gap: '1rem',     // Gap between slides
-        padding: '5rem',
-    });
-
-    // Mount the Splide carousel
-    splide.mount();
-
     $("#register_form").on("submit", function(e) {
         e.preventDefault();
 
@@ -191,6 +179,92 @@
             window.location.href = $(this).attr("href");
         }
     });
+
+    // crate recipe
+    $('#recipeForm').on('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Perform form validation
+        const formData = new FormData(this); // Gather form data
+
+        console.log(formData);
+        
+
+        // Submit form via AJAX
+        $.ajax({
+            url: 'createRecipeBackEnd.php',
+            type: 'POST',
+            data: formData,
+            processData: false, // Required for file upload
+            contentType: false, // Required for file upload
+            success: function(response) {
+                $('#message').html("<p class='text-green-500'>" + response + "</p>");
+                $('#recipeForm')[0].reset(); // Reset form on success
+            },
+            error: function() {
+                $('#message').html("<p class='text-red-500'>Error submitting recipe. Please try again.</p>");
+            }
+        });
+    });
+
+
+    // add more step
+    let stepCount = 1; // Start from 1 since the first step is already in the DOM
+
+    $("#add-step-btn").click(function() {
+        
+        const newStep = `
+            <div class="recipe-step p-5 border rounded my-5" data-index="${stepCount}">
+                <div>
+                    <label for="recipe_step_name_${stepCount}" class="block text-sm font-medium text-gray-700">Recipe Step Name</label>
+                    <input type="text" id="recipe_step_name_${stepCount}" name="recipe_steps[${stepCount}][step_name]" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
+                </div>
+                <div>
+                    <label for="recipe_step_description_${stepCount}" class="block text-sm font-medium text-gray-700">Recipe Step Description</label>
+                    <textarea id="recipe_step_description_${stepCount}" name="recipe_steps[${stepCount}][step_desc]" rows="3" required class="mt-1 block w-full p-2 border border-gray-300 rounded-md"></textarea>
+                </div>
+                <input type="hidden" name="recipe_steps[${stepCount}][sorting]" value="${stepCount + 1}">
+            </div>
+        `;
+
+        // Append the new step to the recipe steps section
+        $("#recipe-steps").append(newStep);
+        stepCount++;
+    });
+
+    // navbar toggle
+    $('#mobile-menu-button').click(function() {
+        $('#mobile-menu').toggleClass('hidden');
+    });
+
+    var splide = new Splide('#splide', {
+        type: 'loop',        // Enables infinite loop
+        perPage: 3,          // Default: Displays 3 slides at a time
+        autoplay: true,      // Autoplay slides
+        interval: 3000,      // 3 seconds per slide
+        gap: '1rem',         // Gap between slides
+        padding: '5rem',     // Default padding
+
+        // Responsive breakpoints
+        breakpoints: {
+            1024: {
+                perPage: 2,  // For screens ≤1024px, show 2 slides
+                padding: '3rem',
+            },
+            768: {
+                perPage: 1,  // For screens ≤768px, show 1 slide
+                padding: '1.5rem',
+            },
+            480: {
+                perPage: 1,  // For screens ≤480px, show 1 slide
+                padding: '0.5rem',
+                gap: '0.5rem',  // Smaller gap on very small screens
+            }
+        }
+    });
+
+// Mount the Splide carousel
+splide.mount();
 
 </script>
 

@@ -22,7 +22,7 @@ CREATE TABLE `recipes` (
   cooking_time INT(11),
   instructions TEXT,
   tip VARCHAR(500),
-  level INT(11),
+  level INT(11) comment '1.easy 2.medium 3.hard',
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   deleted_at TIMESTAMP NULL,
@@ -145,6 +145,7 @@ INSERT INTO category (name) VALUES
   ('Breakfast'),
   ('Side Dish'),
   ('Soup'),
+  ('Pizza'),
   ('Snack');
 
 INSERT INTO recipes_category (recipe_id, category_id) VALUES 
@@ -194,52 +195,4 @@ INSERT INTO recipe_ingredients (recipe_id, ingredients_id) VALUES
   (4, 12),
   (5, 13),
   (5, 12);
-
-
-
--- for recipes details
-
-SELECT
-    r.id AS recipe_id,
-    r.recipe_name,
-    r.description,
-    r.preparation_time,
-    r.cooking_time,
-    r.instructions,
-    r.tip,
-    r.level,
-    CONCAT('[', GROUP_CONCAT(DISTINCT 
-        CONCAT('{',
-            '"id":', c.id, ',',
-            '"name":"', c.name, '"'
-        , '}')
-    ), ']') AS categories,
-    CONCAT('[', GROUP_CONCAT(DISTINCT 
-        CONCAT('{',
-            '"id":', i.id, ',',
-            '"name":"', i.name, '",',
-            '"unit":', i.unit
-        , '}')
-    ), ']') AS ingredients,
-    CONCAT('[', GROUP_CONCAT(
-        CONCAT('{',
-            '"id":', rs.id, ',',
-            '"step_name":"', rs.step_name, '",',
-            '"step_desc":"', rs.step_desc, '",',
-            '"sorting":', rs.sorting
-        , '}')
-        ORDER BY rs.sorting
-    ), ']') AS steps
-FROM
-    recipes r
-LEFT JOIN recipes_category rc ON rc.recipe_id = r.id
-LEFT JOIN category c ON c.id = rc.category_id
-LEFT JOIN recipe_ingredients ri ON ri.recipe_id = r.id
-LEFT JOIN ingredients i ON i.id = ri.ingredients_id
-LEFT JOIN recipe_steps rs ON rs.recipe_id = r.id
-WHERE
-    r.id = 2
-GROUP BY
-    r.id;
-
 

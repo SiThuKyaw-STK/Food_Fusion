@@ -41,7 +41,7 @@ if (session_status() === PHP_SESSION_NONE) {
 <body class="bg-gray-100">
 
     <!-- Navigation Bar -->
-    <nav class="">
+    <nav>
         <div class="bg-blue-700 shadow">
             <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center text-white">
                 <a class="text-2xl font-bold" href="#">FoodFusion</a>
@@ -63,34 +63,50 @@ if (session_status() === PHP_SESSION_NONE) {
                 </div>
             </div>
         </div>
-        <div class="mx-auto shadow">
-            <div class="max-w-6xl mx-auto py-4 flex justify-between items-center">
-                <div class="flex items-center gap-6">
-                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="index.php"><i
-                            class="fa-solid fa-house"></i></a>
+        
+        <div class="bg-white shadow">
+            <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+                <div class="flex items-center gap-6 hidden lg:flex">
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="index.php"><i class="fa-solid fa-house"></i></a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="recipes-list.php">Recipe</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="about-us.php">About Us</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="community.php">Community</a>
-                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#contact_us">Contact Us</a>
-                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold"
-                        href="#educational">Educational</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="contact-us.php">Contact Us</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#educational">Educational</a>
                 </div>
 
-                <div>
+                <div class="hidden lg:flex items-center">
                     <form class="mx-auto">
-                        <label for="default-search"
-                            class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
+                        <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Search</label>
                         <div class="relative">
-                            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-
-                            </div>
                             <input style="width: 20rem;" type="search" id="default-search"
-                                class="block p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                                class="block p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
                                 placeholder="Search Mockups, Logos..." required />
                             <button type="submit"
-                                class="right-5 text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Search</button>
+                                class="absolute inset-y-0 right-0 flex items-center px-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm">Search</button>
                         </div>
                     </form>
+                </div>
+
+                <!-- Mobile menu button-->
+                <div class="lg:hidden">
+                    <button id="mobile-menu-button" class="text-white focus:outline-none focus:ring-2 focus:ring-white">
+                        <i class="fa-solid fa-bars text-black text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden bg-white shadow">
+            <div class="max-w-7xl mx-auto px-4 py-4">
+                <div class="grid gap-2">
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="index.php">Home</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="recipes-list.php">Recipe</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="about-us.php">About Us</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="community.php">Community</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="contact-us.php">Contact Us</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#educational">Educational</a>
                 </div>
             </div>
         </div>

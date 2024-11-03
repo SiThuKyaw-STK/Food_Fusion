@@ -15,6 +15,7 @@ $recipeDetailsQuery = <<<QUERY
             r.instructions,
             r.tip,
             r.level,
+            r.image,
             CONCAT('[',
                 GROUP_CONCAT(DISTINCT 
                 CONCAT('{\"id\":', c.id, ',\"name\":\"', c.name, '\"}')
@@ -51,7 +52,7 @@ if ($recipeResult && $recipeResult->num_rows > 0) {
     $ingredients = json_decode(trim($recipe['ingredients'], ','), true) ?? []; // Remove trailing commas if any
     $steps = json_decode(trim($recipe['steps'], ','), true) ?? []; // Remove trailing commas if any
 
-    print_r($recipe);
+    // print_r($recipe);
 
 } else {
     echo "Recipe not found.";
@@ -65,7 +66,7 @@ ob_start();
 <div class="max-w-7xl mx-auto my-10 py-10">
     <div class="grid grid-cols-3 gap-6">
         <div class="max-w-4xl">
-            <img class="float-right w-full" src="./assets/img/demo_food1.jpg" alt="<?= htmlspecialchars($recipe['recipe_name']); ?>">
+            <img class="float-right w-full" src="<?= $recipe['image']; ?>" alt="<?= htmlspecialchars($recipe['recipe_name']); ?>">
         </div>
 
         <div class="col-span-2">
