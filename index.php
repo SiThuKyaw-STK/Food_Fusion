@@ -1,6 +1,25 @@
 <?php
 // Start output buffering to capture dynamic content
 ob_start();
+
+// Database connection details
+include 'db.php';
+
+// Fetch recipes easy
+$query1 = "SELECT * FROM `recipes` WHERE level = 1 ORDER BY id DESC LIMIT 4";
+$recipesEasy = $conn->query($query1);
+if (!$recipesEasy) {
+    die("Error fetching recipes: " . $conn->error);
+}
+
+// Fetch recipes most view
+$query2 = "SELECT * from recipes ORDER BY view_count DESC LIMIT 4";
+$recipesMostView = $conn->query($query2);
+if (!$recipesMostView) {
+    die("Error fetching recipes: " . $conn->error);
+}
+
+
 ?>
 
 <!-- Mission Section -->
@@ -49,25 +68,25 @@ ob_start();
 
         <div class="grid gap-6 my-10">
             <div>
-                <h1 class="text-xl lg:text-2xl font-medium">Most Trending</h1>
+                <h1 class="text-xl lg:text-2xl font-medium">Most View</h1>
 
                 <!-- card start -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg">
-                        <a href="#">
-                            <img class="rounded-t-lg w-full" src="./assets/img/demo_food1.jpg" alt="" />
-                        </a>
-                        <div class="p-5">
-                            <a href="#">
-                                <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900">
-                                    Noteworthy technology acquisitions 2021
-                                </h5>
-                            </a>
-                            <p class="mb-3 font-normal text-gray-700">
-                                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                            </p>
+                    <?php while ($recipe = $recipesMostView->fetch_assoc()): ?>
+                        <div class="bg-white border border-gray-200 rounded-lg shadow">
+                            <div>
+                                <a href="recipes-details.php?id=<?= $recipe['id']; ?>">
+                                    <img style="height: 250px;" class="rounded-t-lg w-full object-cover" src="<?= $recipe['image']; ?>" alt="<?= $recipe['recipe_name']; ?>" />
+                                </a>
+                            </div>
+                            <div class="p-5">
+                                <a href="recipes-details.php?id=<?= $recipe['id']; ?>">
+                                    <h5 class="font-bold tracking-tight text-gray-900"><?= $recipe['recipe_name']; ?></h5>
+                                </a>
+                                <p class="mb-3 font-normal text-gray-700"><?= $recipe['description']; ?></p>
+                            </div>
                         </div>
-                    </div>
+                    <?php endwhile; ?>
                 </div>
             </div>
 
@@ -76,21 +95,21 @@ ob_start();
 
                 <!-- card start -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-                    <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-lg">
-                        <a href="#">
-                            <img class="rounded-t-lg w-full" src="./assets/img/demo_food1.jpg" alt="" />
-                        </a>
-                        <div class="p-5">
-                            <a href="#">
-                                <h5 class="mb-2 text-lg font-bold tracking-tight text-gray-900">
-                                    Noteworthy technology acquisitions 2021
-                                </h5>
+                <?php while ($recipe = $recipesEasy->fetch_assoc()): ?>
+                    <div class="bg-white border border-gray-200 rounded-lg shadow">
+                        <div>
+                            <a href="recipes-details.php?id=<?= $recipe['id']; ?>">
+                                <img style="height: 250px;" class="rounded-t-lg w-full object-cover" src="<?= $recipe['image']; ?>" alt="<?= $recipe['recipe_name']; ?>" />
                             </a>
-                            <p class="mb-3 font-normal text-gray-700">
-                                Here are the biggest enterprise technology acquisitions of 2021 so far, in reverse chronological order.
-                            </p>
+                        </div>
+                        <div class="p-5">
+                            <a href="recipes-details.php?id=<?= $recipe['id']; ?>">
+                                <h5 class="font-bold tracking-tight text-gray-900"><?= $recipe['recipe_name']; ?></h5>
+                            </a>
+                            <p class="mb-3 font-normal text-gray-700"><?= $recipe['description']; ?></p>
                         </div>
                     </div>
+                <?php endwhile; ?>
                 </div>
             </div>
         </div>

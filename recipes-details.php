@@ -16,6 +16,8 @@ $recipeDetailsQuery = <<<QUERY
             r.tip,
             r.level,
             r.image,
+            u.first_name,
+            u.last_name,
             CONCAT('[',
                 GROUP_CONCAT(DISTINCT 
                 CONCAT('{\"id\":', c.id, ',\"name\":\"', c.name, '\"}')
@@ -35,6 +37,7 @@ $recipeDetailsQuery = <<<QUERY
         LEFT JOIN recipe_ingredients ri ON ri.recipe_id = r.id
         LEFT JOIN ingredients i ON i.id = ri.ingredients_id
         LEFT JOIN recipe_steps rs ON rs.recipe_id = r.id
+        LEFT JOIN user u on u.id = r.user_id
         WHERE
             r.id = $recipeId
         GROUP BY
@@ -72,7 +75,7 @@ ob_start();
         <div class="col-span-2">
             <h1 class="text-4xl"><?= htmlspecialchars($recipe['recipe_name']); ?></h1>
             <div class="my-4 flex justify-between">
-                <span class="font-bold text-blue-500">Recipe by STK</span>
+                <span class="font-bold text-blue-500">Recipe by <?= $recipe['first_name'] .' '. $recipe['last_name']; ?></span>
 
                 <!--  -->
                 <!-- Category display -->
