@@ -72,7 +72,8 @@ if (session_status() === PHP_SESSION_NONE) {
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="about-us.php">About Us</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="community.php">Community</a>
                     <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="contact-us.php">Contact Us</a>
-                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="#educational">Educational</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="educational-resource.php">Educational</a>
+                    <a class="text-gray-700 hover:text-blue-500 text-lg font-semibold" href="culinary-resource.php">Culinary</a>
                 </div>
 
                 <div class="hidden lg:flex items-center">
