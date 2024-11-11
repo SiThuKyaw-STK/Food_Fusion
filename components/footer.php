@@ -79,7 +79,7 @@
         $("#cookieConsent").hide();
     })
     // Open modal when button is clicked
-    $('#joinUsBtn').on('click', function () {
+    $(document).on("click", "#joinUsBtn", function(e){
         $('#register_modal').removeClass('hidden');
     });
 

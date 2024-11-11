@@ -57,7 +57,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <?php else: ?>
                             <button id="loginBtn" class="text-lg" href="#">LogIn</button>
                             <span class="mx-2">|</span>
-                            <a class="text-lg" href="#">Register</a>
+                            <button id="joinUsBtn" class="text-lg" href="#">Register</button>
                         <?php endif; ?>
                     </div>
                 </div>

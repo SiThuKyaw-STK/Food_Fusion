@@ -1,5 +1,6 @@
 <?php
 session_start(); // Start the session
+date_default_timezone_set('Asia/Yangon'); // Set Myanmar time zone
 include 'db.php'; // Include your database connection
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             // Determine if lockout is necessary
             if ($failedAttempts >= 3) {
-                $lockoutTime = 15 * 60; // Lockout for 15 minutes
+                $lockoutTime = 3 * 60; // Lockout for 3 minutes
                 $lockoutUntil = date('Y-m-d H:i:s', time() + $lockoutTime);
                 
                 // Update failed attempts and lockout timestamp
